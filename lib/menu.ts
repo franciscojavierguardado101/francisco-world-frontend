@@ -6,26 +6,24 @@ export interface MenuItem {
   url: string;
   weight: number;
   parent: string | null;
-  children?: MenuItem[];
+  megamenu_style: string;
+  image_url: string | null;
+  description: string | null;
+  text_size: 'display' | 'title' | 'body';
+  children: MenuItem[];
 }
 
 export async function getMenu(menuName: string): Promise<MenuItem[]> {
   try {
     const res = await fetch(
-      `${process.env.NEXT_PUBLIC_DRUPAL_BASE_URL}/jsonapi/menu_items/${menuName}`,
+      `${process.env.NEXT_PUBLIC_DRUPAL_BASE_URL}/api/fg-menu/${menuName}`,
       { cache: 'no-store' }
     );
     if (!res.ok) return [];
     const data = await res.json();
-    const items: MenuItem[] = data.data.map((item: any) => ({
-      id: item.id,
-      title: item.attributes.title,
-      url: item.attributes.url,
-      weight: item.attributes.weight,
-      parent: item.attributes.parent ?? null,
-    }));
-    return items;
-  } catch {
+    return Array.isArray(data) ? data : [];
+  } catch (e) {
+    console.error('Menu fetch error:', e);
     return [];
   }
 }

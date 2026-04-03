@@ -1,3 +1,18 @@
 import type { NextConfig } from 'next';
-const nextConfig: NextConfig = {};
+
+const nextConfig: NextConfig = {
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: '**.ddev.site',
+      },
+      {
+        protocol: 'https',
+        hostname: '**.pantheonsite.io',
+      },
+    ],
+  },
+};
+
 export default nextConfig;
