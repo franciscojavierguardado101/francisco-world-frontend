@@ -1,19 +1,31 @@
 import { resolveDrupalPath, fetchDrupalResource } from '@/lib/drupal';
+import { notFound } from 'next/navigation';
 import ParagraphResolver from '@/components/paragraphs/ParagraphResolver';
 
-export default async function HomePage() {
-  const route = await resolveDrupalPath('/');
-  if (!route) {
-    return (
-      <main className="min-h-screen flex items-center justify-center">
-        <p className="text-muted-foreground">No homepage configured in Drupal yet.</p>
-      </main>
-    );
-  }
+const INCLUDE_MAP: Record<string, string[]> = {
+  landing_page: [
+    'field_components',
+  ],
+  article: [],
+  page: [
+    'field_components',
+  ],
+};
 
-  const includes = ['field_components'];
+export default async function CatchAllPage({
+  params,
+}: {
+  params: Promise<{ slug: string[] }>;
+}) {
+  const { slug } = await params;
+  const path = '/' + slug.join('/');
+
+  const route = await resolveDrupalPath(path);
+  if (!route) return notFound();
+
+  const includes = INCLUDE_MAP[route.bundle] ?? [];
   const data = await fetchDrupalResource(route.jsonapiUrl, includes);
-  if (!data) return null;
+  if (!data) return notFound();
 
   const node = data.data;
   const included = data.included ?? [];
