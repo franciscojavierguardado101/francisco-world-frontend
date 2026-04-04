@@ -27,62 +27,95 @@ export default function FeatureStackCategories({ stacks }: Props) {
   return (
     <div className="w-full">
       {rows.map((row, rowIdx) => (
-        <div
-          key={rowIdx}
-          className="max-w-[1524px] mx-auto px-6"
-          style={{
-            display: 'grid',
-            gridTemplateColumns: `repeat(${row.length}, 1fr)`,
-            gap: '24px',
-          }}
-        >
-          {row.map((stack) => {
-            const colorKey = stack.color ?? 'field_stack_c_b';
-            const colors = STACK_COLOR_MAP[colorKey] ?? STACK_COLOR_MAP['field_stack_c_b'];
-            return (
-              <button
-                key={stack.id}
-                onClick={() => scrollToStack(stack.id)}
-                className="group relative flex flex-col justify-between text-left overflow-hidden"
-                style={{
-                  height: '98px',
-                  padding: '16px 0 16px 0',
-                  backgroundColor: 'transparent',
-                }}
-              >
-                {/* Individual top line per tab */}
-                <span
-                  className="absolute top-0 left-0 right-0 h-[3px]"
-                  style={{ backgroundColor: colors.hoverBg }}
-                />
-
-                {/* Hover background fill from top */}
-                <span
-                  className="absolute inset-0 -translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-0"
-                  style={{ backgroundColor: colors.hoverBg }}
-                  aria-hidden="true"
-                />
-
-                {/* Category label */}
-                <span
-                  className="relative z-10 text-3xl font-bold leading-tight group-hover:text-white transition-colors duration-300 pl-8"
-                  style={{ color: colors.tabText }}
+        <div key={rowIdx} className="max-w-[1524px] mx-auto px-6">
+          {/* Desktop: horizontal grid */}
+          <div
+            className="hidden md:grid"
+            style={{
+              gridTemplateColumns: `repeat(${row.length}, 1fr)`,
+              gap: '24px',
+            }}
+          >
+            {row.map((stack) => {
+              const colorKey = stack.color ?? 'field_stack_c_b';
+              const colors = STACK_COLOR_MAP[colorKey] ?? STACK_COLOR_MAP['field_stack_c_b'];
+              return (
+                <button
+                  key={stack.id}
+                  onClick={() => scrollToStack(stack.id)}
+                  className="group relative flex flex-col justify-between text-left overflow-hidden"
+                  style={{
+                    height: '98px',
+                    padding: '16px 0 16px 0',
+                    backgroundColor: 'transparent',
+                    borderRadius: 0,
+                  }}
                 >
-                  {stack.category}
-                </span>
+                  <span className="absolute top-0 left-0 right-0 h-[3px]" style={{ backgroundColor: colors.hoverBg }} />
+                  <span
+                    className="absolute inset-0 -translate-y-full group-hover:translate-y-0 transition-transform duration-300 ease-out z-0"
+                    style={{ backgroundColor: colors.hoverBg }}
+                    aria-hidden="true"
+                  />
+                  <span
+                    className="relative z-10 text-3xl font-bold leading-tight group-hover:text-white transition-colors duration-300 pl-8"
+                    style={{ color: colors.tabText }}
+                  >
+                    {stack.category}
+                  </span>
+                  <svg
+                    viewBox="0 0 24 24"
+                    className="relative z-10 w-6 h-6 ml-8 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    fill="currentColor"
+                    style={{ color: '#ffffff' }}
+                  >
+                    <path d="M3.5 10.586a1 1 0 0 0-.707 1.707l9.2 9.207 9.202-9.207a1 1 0 1 0-1.413-1.414L13 17.665V3.5a1 1 0 1 0-2 0v14.178l-6.794-6.8a1 1 0 0 0-.707-.292z" />
+                  </svg>
+                </button>
+              );
+            })}
+          </div>
 
-                {/* Arrow — hidden by default, visible on hover in white */}
-                <svg
-                  viewBox="0 0 24 24"
-                  className="relative z-10 w-6 h-6 ml-8 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
-                  fill="currentColor"
-                  style={{ color: '#ffffff' }}
+          {/* Mobile: vertical stack */}
+          <div className="flex flex-col md:hidden gap-0">
+            {row.map((stack) => {
+              const colorKey = stack.color ?? 'field_stack_c_b';
+              const colors = STACK_COLOR_MAP[colorKey] ?? STACK_COLOR_MAP['field_stack_c_b'];
+              return (
+                <button
+                  key={`mob-${stack.id}`}
+                  onClick={() => scrollToStack(stack.id)}
+                  className="relative flex flex-row items-center justify-between text-left w-full border-b border-black/10"
+                  style={{
+                    padding: '20px 0',
+                    backgroundColor: 'transparent',
+                    borderRadius: 0,
+                  }}
                 >
-                  <path d="M3.5 10.586a1 1 0 0 0-.707 1.707l9.2 9.207 9.202-9.207a1 1 0 1 0-1.413-1.414L13 17.665V3.5a1 1 0 1 0-2 0v14.178l-6.794-6.8a1 1 0 0 0-.707-.292z" />
-                </svg>
-              </button>
-            );
-          })}
+                  {/* Left accent bar */}
+                  <span
+                    className="absolute left-0 top-0 bottom-0 w-[3px]"
+                    style={{ backgroundColor: colors.hoverBg }}
+                  />
+                  <span
+                    className="text-xl font-bold pl-6"
+                    style={{ color: colors.tabText }}
+                  >
+                    {stack.category}
+                  </span>
+                  {/* Arrow pointing down on mobile */}
+                  <svg
+                    viewBox="0 0 24 24"
+                    className="w-5 h-5 flex-shrink-0"
+                    fill="currentColor"
+                    style={{ color: colors.hoverBg }}
+                  >
+                    <path d="M3.5 10.586a1 1 0 0 0-.707 1.707l9.2 9.207 9.202-9.207a1 1 0 1 0-1.413-1.414L13 17.665V3.5a1 1 0 1 0-2 0v14.178l-6.794-6.8a1 1 0 0 0-.707-.292z" />
+                  </svg>
+                </button>
+              );
+            })}
+          </div>
         </div>
       ))}
     </div>
