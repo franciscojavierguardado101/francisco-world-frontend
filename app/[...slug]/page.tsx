@@ -1,20 +1,9 @@
+// Import registry so all components and their includes are loaded
+import '@/lib/paragraphs/index';
+import { getAllIncludes } from '@/lib/paragraphs/registry';
 import { resolveDrupalPath, fetchDrupalResource } from '@/lib/drupal';
 import { notFound } from 'next/navigation';
 import ParagraphResolver from '@/components/paragraphs/ParagraphResolver';
-
-// Global includes that apply to ANY content type with field_components.
-// Add new paragraph type includes here as you build new components.
-// Never list content types here — this must work with any content type.
-const PARAGRAPH_INCLUDES: string[] = [
-  'field_components',
-  // feature_stack: parent media
-  'field_components.field_feature_s_media',
-  'field_components.field_feature_s_media.field_media_image',
-  // feature_stack: nested stacks + their media
-  'field_components.field_feature_s_stack',
-  'field_components.field_feature_s_stack.field_stack_media',
-  'field_components.field_feature_s_stack.field_stack_media.field_media_image',
-];
 
 export default async function CatchAllPage({
   params,
@@ -27,7 +16,10 @@ export default async function CatchAllPage({
   const route = await resolveDrupalPath(path);
   if (!route) return notFound();
 
-  const data = await fetchDrupalResource(route.jsonapiUrl, PARAGRAPH_INCLUDES);
+  // Includes are automatically derived from all registered paragraph components.
+  // No manual maintenance needed — adding a new component auto-updates includes.
+  const includes = getAllIncludes();
+  const data = await fetchDrupalResource(route.jsonapiUrl, includes);
   if (!data) return notFound();
 
   const node = data.data;
