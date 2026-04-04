@@ -25,9 +25,13 @@ export default function FeatureStackCategories({ stacks }: Props) {
   }
 
   return (
-    <div className="max-w-[1524px] mx-auto px-6 py-4">
+    <div className="w-full">
       {rows.map((row, rowIdx) => (
-        <div key={rowIdx} className="flex flex-wrap gap-0 mb-0">
+        <div
+          key={rowIdx}
+          className="max-w-[1524px] mx-auto px-6"
+          style={{ display: 'grid', gridTemplateColumns: `repeat(${row.length}, 1fr)`, gap: '1.5rem' }}
+        >
           {row.map((stack) => {
             const colorKey = stack.color ?? 'field_stack_c_b';
             const colors = STACK_COLOR_MAP[colorKey] ?? STACK_COLOR_MAP['field_stack_c_b'];
@@ -35,16 +39,13 @@ export default function FeatureStackCategories({ stacks }: Props) {
               <button
                 key={stack.id}
                 onClick={() => scrollToStack(stack.id)}
-                className="group relative flex flex-col justify-between px-0 py-6 pr-16 text-left overflow-hidden"
-                style={{
-                  backgroundColor: 'transparent',
-                  marginRight: '2.5rem',
-                }}
+                className="group relative flex flex-col justify-between pt-6 pb-8 px-0 text-left overflow-hidden"
+                style={{ backgroundColor: 'transparent' }}
               >
-                {/* Top color line */}
+                {/* Top color line — always the hover/accent color */}
                 <span
-                  className="absolute top-0 left-0 right-0 h-[3px] transition-colors duration-200"
-                  style={{ backgroundColor: colors.tabArrow }}
+                  className="absolute top-0 left-0 right-0 h-[3px]"
+                  style={{ backgroundColor: colors.hoverBg }}
                 />
 
                 {/* Hover background fill from top */}
@@ -56,7 +57,7 @@ export default function FeatureStackCategories({ stacks }: Props) {
 
                 {/* Category label */}
                 <span
-                  className="relative z-10 text-sm font-bold whitespace-nowrap group-hover:transition-colors duration-200"
+                  className="relative z-10 text-lg font-bold leading-tight group-hover:text-white transition-colors duration-300"
                   style={{ color: colors.tabText }}
                 >
                   {stack.category}
@@ -65,7 +66,7 @@ export default function FeatureStackCategories({ stacks }: Props) {
                 {/* Down arrow */}
                 <svg
                   viewBox="0 0 24 24"
-                  className="relative z-10 w-5 h-5 mt-4"
+                  className="relative z-10 w-6 h-6 mt-8 group-hover:text-white transition-colors duration-300"
                   fill="currentColor"
                   style={{ color: colors.tabArrow }}
                 >

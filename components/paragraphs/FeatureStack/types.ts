@@ -60,7 +60,7 @@ export const STACK_COLOR_MAP: Record<string, {
   field_stack_c_cr: {
     tabBg: 'transparent',
     tabText: '#000000',
-    tabArrow: '#000000',
+    tabArrow: 'rgb(254, 72, 52)',  // top line = accent color always
     hoverBg: 'rgb(254, 72, 52)',
     hoverText: '#ffffff',
   },
