@@ -64,6 +64,13 @@ export const STACK_COLOR_MAP: Record<string, {
     hoverBg: 'rgb(254, 72, 52)',
     hoverText: '#ffffff',
   },
+  field_stack_c_l_g: {
+    tabBg: 'transparent',
+    tabText: '#000000',
+    tabArrow: 'rgb(207, 245, 106)',
+    hoverBg: 'rgb(207, 245, 106)',
+    hoverText: '#000000',
+  },
   field_stack_c_b: {
     tabBg: 'transparent',
     tabText: '#000000',
