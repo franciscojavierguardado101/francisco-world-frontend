@@ -2,6 +2,7 @@ import { FeatureStackData, PARENT_COLOR_MAP } from './types';
 import FeatureStackHero from './FeatureStackHero';
 import FeatureStackCategories from './FeatureStackCategories';
 import StackItem from './StackItem';
+import StackMarksItem from './StackMarksItem';
 
 interface Props {
   data: FeatureStackData;

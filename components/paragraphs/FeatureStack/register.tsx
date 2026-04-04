@@ -15,8 +15,12 @@ registerParagraph({
     'field_components.field_feature_s_media',
     'field_components.field_feature_s_media.field_media_image',
     'field_components.field_feature_s_stack',
+    // stack child media
     'field_components.field_feature_s_stack.field_stack_media',
     'field_components.field_feature_s_stack.field_stack_media.field_media_image',
+    // stack_marks child media
+    'field_components.field_feature_s_stack.field_stack_m_media',
+    'field_components.field_feature_s_stack.field_stack_m_media.field_media_image',
   ],
 
   // Wrapper component that transforms raw Drupal JSON:API data and renders

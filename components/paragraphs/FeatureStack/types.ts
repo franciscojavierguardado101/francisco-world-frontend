@@ -6,6 +6,7 @@ export interface StackMediaItem {
 
 export interface StackItem {
   id: string;
+  type: 'paragraph--stack';
   category: string;
   title: string;
   description: string;
@@ -15,6 +16,19 @@ export interface StackItem {
   color: 'field_stack_c_s' | 'field_stack_c_cr' | 'field_stack_c_b' | null;
 }
 
+export interface StackMarksItem {
+  id: string;
+  type: 'paragraph--stack_marks';
+  category: string;
+  title: string;
+  description: string;
+  details: string[]; // up to 5 detail strings
+  url: { uri: string; title: string } | null;
+  media: StackMediaItem | null;
+  position: 'field_stack_m_l' | 'field_stack_m_r' | null;
+  color: 'field_stack_m_c_s' | 'field_stack_m_c_cr' | 'field_stack_m_c_b' | 'field_stack_m_c_l_g' | null;
+}
+
 export interface FeatureStackData {
   id: string;
   title: string;
@@ -22,7 +36,7 @@ export interface FeatureStackData {
   media: StackMediaItem | null;
   position: 'field_feature_s_pos_l' | 'field_feature_s_pos_r' | null;
   color: string | null;
-  stacks: StackItem[];
+  stacks: (StackItem | StackMarksItem)[];
 }
 
 // Parent section background colors — keyed by Drupal list_string value
@@ -40,6 +54,55 @@ export const PARENT_COLOR_MAP: Record<string, {
   field_feature_s_c_c: { bg: '#3d2940', text: '#ffffff', subtext: '#c9b8d0', buttonText: '#3d2940' },
   field_feature_s_c_o: { bg: '#414d1e', text: '#ffffff', subtext: '#c8d49a', buttonText: '#414d1e' },
   field_feature_s_c_r: { bg: '#01392c', text: '#ffffff', subtext: '#80c4a8', buttonText: '#01392c' },
+};
+
+// Stack Marks color map — controls category tabs AND checkmark colors
+// checkBg: circle background, checkMark: tick color inside the circle
+export const STACK_MARKS_COLOR_MAP: Record<string, {
+  tabBg: string;
+  tabText: string;
+  tabArrow: string;
+  hoverBg: string;
+  hoverText: string;
+  checkBg: string;
+  checkMark: string;
+}> = {
+  field_stack_m_c_s: {
+    tabBg: '#1d2b3a',
+    tabText: 'rgb(130, 161, 192)',
+    tabArrow: 'rgb(130, 161, 192)',
+    hoverBg: '#1d2b3a',
+    hoverText: 'rgb(130, 161, 192)',
+    checkBg: 'rgb(130, 161, 192)',
+    checkMark: '#1d2b3a',
+  },
+  field_stack_m_c_cr: {
+    tabBg: 'transparent',
+    tabText: '#000000',
+    tabArrow: 'rgb(254, 72, 52)',
+    hoverBg: 'rgb(254, 72, 52)',
+    hoverText: '#ffffff',
+    checkBg: 'rgb(254, 72, 52)',
+    checkMark: '#000000',
+  },
+  field_stack_m_c_b: {
+    tabBg: 'transparent',
+    tabText: '#000000',
+    tabArrow: '#000000',
+    hoverBg: '#000000',
+    hoverText: '#ffffff',
+    checkBg: '#000000',
+    checkMark: '#ffffff',
+  },
+  field_stack_m_c_l_g: {
+    tabBg: 'transparent',
+    tabText: '#000000',
+    tabArrow: '#000000',
+    hoverBg: 'rgb(207, 245, 106)',
+    hoverText: '#000000',
+    checkBg: 'rgb(207, 245, 106)',
+    checkMark: '#000000',
+  },
 };
 
 // Child category tab color schemes — keyed by Drupal list_string value

@@ -1,10 +1,10 @@
 'use client';
 
 import { useCallback } from 'react';
-import { StackItem, STACK_COLOR_MAP } from './types';
+import { StackItem, StackMarksItem, STACK_COLOR_MAP, STACK_MARKS_COLOR_MAP } from './types';
 
 interface Props {
-  stacks: StackItem[];
+  stacks: (StackItem | StackMarksItem)[];
 }
 
 const COLS_PER_ROW = 5;
@@ -37,8 +37,11 @@ export default function FeatureStackCategories({ stacks }: Props) {
             }}
           >
             {row.map((stack) => {
-              const colorKey = stack.color ?? 'field_stack_c_b';
-              const colors = STACK_COLOR_MAP[colorKey] ?? STACK_COLOR_MAP['field_stack_c_b'];
+              const isMarks = stack.type === 'paragraph--stack_marks';
+              const colorKey = stack.color ?? (isMarks ? 'field_stack_m_c_b' : 'field_stack_c_b');
+              const colorMap = isMarks ? STACK_MARKS_COLOR_MAP : STACK_COLOR_MAP;
+              const fallback = isMarks ? 'field_stack_m_c_b' : 'field_stack_c_b';
+              const colors = colorMap[colorKey] ?? colorMap[fallback];
               return (
                 <button
                   key={stack.id}
@@ -79,8 +82,11 @@ export default function FeatureStackCategories({ stacks }: Props) {
           {/* Mobile: vertical stack */}
           <div className="flex flex-col md:hidden gap-0">
             {row.map((stack) => {
-              const colorKey = stack.color ?? 'field_stack_c_b';
-              const colors = STACK_COLOR_MAP[colorKey] ?? STACK_COLOR_MAP['field_stack_c_b'];
+              const isMarks = stack.type === 'paragraph--stack_marks';
+              const colorKey = stack.color ?? (isMarks ? 'field_stack_m_c_b' : 'field_stack_c_b');
+              const colorMap = isMarks ? STACK_MARKS_COLOR_MAP : STACK_COLOR_MAP;
+              const fallback = isMarks ? 'field_stack_m_c_b' : 'field_stack_c_b';
+              const colors = colorMap[colorKey] ?? colorMap[fallback];
               return (
                 <button
                   key={`mob-${stack.id}`}
