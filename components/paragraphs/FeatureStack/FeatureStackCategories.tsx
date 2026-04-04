@@ -67,7 +67,7 @@ export default function FeatureStackCategories({ stacks }: Props) {
                     viewBox="0 0 24 24"
                     className="relative z-10 w-6 h-6 ml-8 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     fill="currentColor"
-                    style={{ color: '#ffffff' }}
+                    style={{ color: colors.hoverText }}
                   >
                     <path d="M3.5 10.586a1 1 0 0 0-.707 1.707l9.2 9.207 9.202-9.207a1 1 0 1 0-1.413-1.414L13 17.665V3.5a1 1 0 1 0-2 0v14.178l-6.794-6.8a1 1 0 0 0-.707-.292z" />
                   </svg>
