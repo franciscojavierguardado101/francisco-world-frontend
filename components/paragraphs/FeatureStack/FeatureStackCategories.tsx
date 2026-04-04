@@ -30,7 +30,7 @@ export default function FeatureStackCategories({ stacks }: Props) {
         <div
           key={rowIdx}
           className="max-w-[1524px] mx-auto px-6"
-          style={{ display: 'grid', gridTemplateColumns: `repeat(${row.length}, 1fr)`, gap: '1.5rem' }}
+          style={{ display: 'grid', gridTemplateColumns: `repeat(${row.length}, 1fr)` }}
         >
           {row.map((stack) => {
             const colorKey = stack.color ?? 'field_stack_c_b';
@@ -39,10 +39,10 @@ export default function FeatureStackCategories({ stacks }: Props) {
               <button
                 key={stack.id}
                 onClick={() => scrollToStack(stack.id)}
-                className="group relative flex flex-col justify-between pt-6 pb-8 px-0 text-left overflow-hidden"
+                className="group relative flex flex-col justify-between pt-6 pb-8 px-6 text-left overflow-hidden"
                 style={{ backgroundColor: 'transparent' }}
               >
-                {/* Top color line — always the hover/accent color */}
+                {/* Top accent line */}
                 <span
                   className="absolute top-0 left-0 right-0 h-[3px]"
                   style={{ backgroundColor: colors.hoverBg }}
@@ -57,18 +57,18 @@ export default function FeatureStackCategories({ stacks }: Props) {
 
                 {/* Category label */}
                 <span
-                  className="relative z-10 text-lg font-bold leading-tight group-hover:text-white transition-colors duration-300"
+                  className="relative z-10 text-xl font-bold leading-tight group-hover:text-white transition-colors duration-300"
                   style={{ color: colors.tabText }}
                 >
                   {stack.category}
                 </span>
 
-                {/* Down arrow */}
+                {/* Arrow — hidden by default, visible on hover */}
                 <svg
                   viewBox="0 0 24 24"
-                  className="relative z-10 w-6 h-6 mt-8 group-hover:text-white transition-colors duration-300"
+                  className="relative z-10 w-6 h-6 mt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   fill="currentColor"
-                  style={{ color: colors.tabArrow }}
+                  style={{ color: '#ffffff' }}
                 >
                   <path d="M3.5 10.586a1 1 0 0 0-.707 1.707l9.2 9.207 9.202-9.207a1 1 0 1 0-1.413-1.414L13 17.665V3.5a1 1 0 1 0-2 0v14.178l-6.794-6.8a1 1 0 0 0-.707-.292z" />
                 </svg>
