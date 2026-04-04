@@ -1,3 +1,5 @@
+import FeatureStack from './FeatureStack';
+import { buildFeatureStack } from '@/lib/paragraphs/feature-stack';
 import React from 'react';
 
 interface ParagraphResolverProps {
