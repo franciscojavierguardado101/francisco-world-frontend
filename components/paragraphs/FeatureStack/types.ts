@@ -67,7 +67,7 @@ export const STACK_COLOR_MAP: Record<string, {
   field_stack_c_l_g: {
     tabBg: 'transparent',
     tabText: '#000000',
-    tabArrow: 'rgb(207, 245, 106)',
+    tabArrow: '#000000',
     hoverBg: 'rgb(207, 245, 106)',
     hoverText: '#000000',
   },
