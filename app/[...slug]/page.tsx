@@ -37,7 +37,7 @@ export default async function CatchAllPage({
     .filter(Boolean);
 
   return (
-    <main className="pt-[76px]">
+    <main>
       {resolvedComponents.map((paragraph: any) => (
         <ParagraphResolver key={paragraph.id} paragraph={paragraph} />
       ))}

@@ -11,7 +11,7 @@ export default function FeatureStack({ data }: Props) {
   const colors = data.color ? PARENT_COLOR_MAP[data.color] : PARENT_COLOR_MAP['field_feature_s_c_w'];
 
   return (
-    <section style={{ backgroundColor: colors.bg }} className="w-full">
+    <section style={{ backgroundColor: colors.bg, paddingTop: "76px" }} className="w-full">
       {/* Parent hero — title, description, media */}
       <FeatureStackHero data={data} />
 
