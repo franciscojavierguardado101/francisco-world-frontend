@@ -30,7 +30,10 @@ export default function FeatureStackCategories({ stacks }: Props) {
         <div
           key={rowIdx}
           className="max-w-[1524px] mx-auto px-6"
-          style={{ display: 'grid', gridTemplateColumns: `repeat(${row.length}, 1fr)` }}
+          style={{
+            display: 'grid',
+            gridTemplateColumns: `repeat(${row.length}, 1fr)`,
+          }}
         >
           {row.map((stack) => {
             const colorKey = stack.color ?? 'field_stack_c_b';
@@ -39,8 +42,12 @@ export default function FeatureStackCategories({ stacks }: Props) {
               <button
                 key={stack.id}
                 onClick={() => scrollToStack(stack.id)}
-                className="group relative flex flex-col justify-between pt-6 pb-8 px-6 text-left overflow-hidden"
-                style={{ backgroundColor: 'transparent' }}
+                className="group relative flex flex-col justify-between text-left overflow-hidden"
+                style={{
+                  height: '98px',
+                  padding: '16px 32px 16px 0',
+                  backgroundColor: 'transparent',
+                }}
               >
                 {/* Top accent line */}
                 <span
@@ -57,7 +64,7 @@ export default function FeatureStackCategories({ stacks }: Props) {
 
                 {/* Category label */}
                 <span
-                  className="relative z-10 text-xl font-bold leading-tight group-hover:text-white transition-colors duration-300"
+                  className="relative z-10 text-2xl font-bold leading-tight group-hover:text-white transition-colors duration-300"
                   style={{ color: colors.tabText }}
                 >
                   {stack.category}
@@ -66,7 +73,7 @@ export default function FeatureStackCategories({ stacks }: Props) {
                 {/* Arrow — hidden by default, visible on hover */}
                 <svg
                   viewBox="0 0 24 24"
-                  className="relative z-10 w-6 h-6 mt-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                  className="relative z-10 w-6 h-6 opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                   fill="currentColor"
                   style={{ color: '#ffffff' }}
                 >
