@@ -2,13 +2,26 @@ import { resolveDrupalPath, fetchDrupalResource } from '@/lib/drupal';
 import { notFound } from 'next/navigation';
 import ParagraphResolver from '@/components/paragraphs/ParagraphResolver';
 
+// Add includes here when a new paragraph type needs related data (images, nested paragraphs, etc.)
+// Format: 'relationship.nested_relationship' using Drupal JSON:API include syntax
 const INCLUDE_MAP: Record<string, string[]> = {
   landing_page: [
     'field_components',
+    // feature_stack: parent media + nested stacks + their media
+    'field_components.field_feature_s_media',
+    'field_components.field_feature_s_media.field_media_image',
+    'field_components.field_feature_s_stack',
+    'field_components.field_feature_s_stack.field_stack_media',
+    'field_components.field_feature_s_stack.field_stack_media.field_media_image',
   ],
   article: [],
   page: [
     'field_components',
+    'field_components.field_feature_s_media',
+    'field_components.field_feature_s_media.field_media_image',
+    'field_components.field_feature_s_stack',
+    'field_components.field_feature_s_stack.field_stack_media',
+    'field_components.field_feature_s_stack.field_stack_media.field_media_image',
   ],
 };
 
@@ -19,7 +32,6 @@ export default async function CatchAllPage({
 }) {
   const { slug } = await params;
   const path = '/' + slug.join('/');
-
   const route = await resolveDrupalPath(path);
   if (!route) return notFound();
 
@@ -40,8 +52,7 @@ export default async function CatchAllPage({
   }).filter(Boolean);
 
   return (
-    <main>
-      <h1>{node.attributes?.title}</h1>
+    <main className="pt-[76px]">
       {resolvedComponents.map((paragraph: any) => (
         <ParagraphResolver key={paragraph.id} paragraph={paragraph} />
       ))}

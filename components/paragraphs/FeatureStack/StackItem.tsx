@@ -6,7 +6,10 @@ interface Props {
 }
 
 export default function StackItem({ stack, parentColor }: Props) {
-  const colors = parentColor ? PARENT_COLOR_MAP[parentColor] : PARENT_COLOR_MAP['field_feature_s_c_w'];
+  const colors = parentColor
+    ? (PARENT_COLOR_MAP[parentColor] ?? PARENT_COLOR_MAP['field_feature_s_c_w'])
+    : PARENT_COLOR_MAP['field_feature_s_c_w'];
+
   const isRight = stack.position === 'field_stack_r';
 
   return (
@@ -18,10 +21,11 @@ export default function StackItem({ stack, parentColor }: Props) {
       <div
         className={[
           'grid grid-cols-1 lg:grid-cols-2 gap-12 items-center',
-          isRight ? 'lg:[&>*:first-child]:order-2 lg:[&>*:last-child]:order-1' : '',
+          isRight
+            ? 'lg:[&>*:first-child]:order-2 lg:[&>*:last-child]:order-1'
+            : '',
         ].join(' ')}
       >
-        {/* Text side */}
         <div className="flex flex-col gap-6">
           {stack.title && (
             <h2
@@ -44,10 +48,7 @@ export default function StackItem({ stack, parentColor }: Props) {
               
                 href={stack.url.uri}
                 className="inline-flex items-center justify-center px-8 py-4 rounded-full font-bold text-sm transition-transform hover:scale-105"
-                style={{
-                  backgroundColor: colors.text,
-                  color: colors.bg,
-                }}
+                style={{ backgroundColor: colors.text, color: colors.buttonText }}
               >
                 {stack.url.title || 'Learn more'}
               </a>
@@ -55,7 +56,6 @@ export default function StackItem({ stack, parentColor }: Props) {
           )}
         </div>
 
-        {/* Media side */}
         {stack.media && (
           <div className="relative w-full aspect-square overflow-hidden">
             {stack.media.type === 'video' ? (
@@ -70,7 +70,7 @@ export default function StackItem({ stack, parentColor }: Props) {
             ) : (
               <img
                 src={stack.media.url}
-                alt={stack.media.alt || stack.title}
+                alt={stack.media.alt ?? stack.title}
                 className="w-full h-full object-cover"
               />
             )}

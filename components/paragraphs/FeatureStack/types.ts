@@ -25,18 +25,24 @@ export interface FeatureStackData {
   stacks: StackItem[];
 }
 
-// Color map for parent background
-export const PARENT_COLOR_MAP: Record<string, { bg: string; text: string; subtext: string }> = {
-  field_feature_s_c_w: { bg: '#ffffff', text: '#000000', subtext: '#333333' },
-  field_feature_s_c_b: { bg: '#000000', text: '#ffffff', subtext: '#aaaaaa' },
-  field_feature_s_c_a: { bg: '#C8E0FC', text: '#000000', subtext: '#1d2b3a' },
-  field_feature_s_c_i: { bg: '#6443f5', text: '#ffffff', subtext: '#d4ccff' },
-  field_feature_s_c_c: { bg: '#3d2940', text: '#ffffff', subtext: '#c9b8d0' },
-  field_feature_s_c_o: { bg: '#414d1e', text: '#ffffff', subtext: '#c8d49a' },
-  field_feature_s_c_r: { bg: '#01392c', text: '#ffffff', subtext: '#80c4a8' },
+// Parent section background colors — keyed by Drupal list_string value
+// bg: section background, text: headings/buttons, subtext: body copy, buttonText: button label
+export const PARENT_COLOR_MAP: Record<string, {
+  bg: string;
+  text: string;
+  subtext: string;
+  buttonText: string;
+}> = {
+  field_feature_s_c_w: { bg: '#ffffff', text: '#000000', subtext: '#333333', buttonText: '#ffffff' },
+  field_feature_s_c_b: { bg: '#000000', text: '#ffffff', subtext: '#aaaaaa', buttonText: '#000000' },
+  field_feature_s_c_a: { bg: '#C8E0FC', text: '#000000', subtext: '#1d2b3a', buttonText: '#C8E0FC' },
+  field_feature_s_c_i: { bg: '#6443f5', text: '#ffffff', subtext: '#d4ccff', buttonText: '#6443f5' },
+  field_feature_s_c_c: { bg: '#3d2940', text: '#ffffff', subtext: '#c9b8d0', buttonText: '#3d2940' },
+  field_feature_s_c_o: { bg: '#414d1e', text: '#ffffff', subtext: '#c8d49a', buttonText: '#414d1e' },
+  field_feature_s_c_r: { bg: '#01392c', text: '#ffffff', subtext: '#80c4a8', buttonText: '#01392c' },
 };
 
-// Color map for child category tabs
+// Child category tab color schemes — keyed by Drupal list_string value
 export const STACK_COLOR_MAP: Record<string, {
   tabBg: string;
   tabText: string;
