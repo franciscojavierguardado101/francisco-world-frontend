@@ -1,3 +1,6 @@
+'use client';
+
+import { useState } from 'react';
 import { FaqsData, FAQS_COLOR_MAP } from './types';
 import FaqLinkItem from './FaqLinkItem';
 
@@ -21,6 +24,7 @@ function ArrowRightSmall({ color }: { color: string }) {
 
 export default function FAQs({ data }: Props) {
   const colors = FAQS_COLOR_MAP[data.color] ?? FAQS_COLOR_MAP['field_faqs_c_w'];
+  const [hoveredIndex, setHoveredIndex] = useState<number | null>(null);
 
   return (
     <section
@@ -53,10 +57,8 @@ export default function FAQs({ data }: Props) {
           {/* Right side — link list + see-all url below */}
           <div className="flex flex-col gap-0" style={{ width: '556px', maxWidth: '100%' }}>
             {data.links.length > 0 && (
-              <ul
-                className="p-0 m-0"
-              >
-                {data.links.map((item) => (
+              <ul className="p-0 m-0">
+                {data.links.map((item, idx) => (
                   <FaqLinkItem
                     key={item.id}
                     item={item}
@@ -64,6 +66,10 @@ export default function FAQs({ data }: Props) {
                     linkBorder={colors.text}
                     hoverBg={colors.hoverBg}
                     hoverText={colors.hoverText}
+                    isHovered={hoveredIndex === idx}
+                    isNextHovered={hoveredIndex === idx - 1}
+                    onMouseEnter={() => setHoveredIndex(idx)}
+                    onMouseLeave={() => setHoveredIndex(null)}
                   />
                 ))}
               </ul>

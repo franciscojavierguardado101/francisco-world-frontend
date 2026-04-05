@@ -1,6 +1,5 @@
 'use client';
 
-import { useState } from 'react';
 import { FaqLinkItem as FaqLinkItemType } from './types';
 
 interface Props {
@@ -9,22 +8,37 @@ interface Props {
   linkBorder: string;
   hoverBg: string;
   hoverText: string;
+  isHovered: boolean;
+  isNextHovered: boolean;
+  onMouseEnter: () => void;
+  onMouseLeave: () => void;
 }
 
-export default function FaqLinkItem({ item, linkText, linkBorder, hoverBg, hoverText }: Props) {
-  const [hovered, setHovered] = useState(false);
-
+export default function FaqLinkItem({
+  item,
+  linkText,
+  linkBorder,
+  hoverBg,
+  hoverText,
+  isHovered,
+  isNextHovered,
+  onMouseEnter,
+  onMouseLeave,
+}: Props) {
   if (!item.link) return null;
+
+  // Hide top border when this item is hovered OR when the previous item is hovered
+  const showBorder = !isHovered && !isNextHovered;
 
   return (
     <li
       className="list-none"
       style={{
-        borderTop: hovered ? 'transparent' : `1px solid ${linkBorder}`,
+        borderTop: showBorder ? `1px solid ${linkBorder}` : '1px solid transparent',
         transition: 'border-color 0.2s ease',
       }}
-      onMouseEnter={() => setHovered(true)}
-      onMouseLeave={() => setHovered(false)}
+      onMouseEnter={onMouseEnter}
+      onMouseLeave={onMouseLeave}
     >
       <a
         href={item.link.uri}
@@ -36,7 +50,7 @@ export default function FaqLinkItem({ item, linkText, linkBorder, hoverBg, hover
           className="absolute inset-0 transition-transform duration-300 ease-out z-0"
           style={{
             backgroundColor: hoverBg,
-            transform: hovered ? 'translateX(0)' : 'translateX(-100%)',
+            transform: isHovered ? 'translateX(0)' : 'translateX(-100%)',
           }}
           aria-hidden="true"
         />
@@ -44,7 +58,7 @@ export default function FaqLinkItem({ item, linkText, linkBorder, hoverBg, hover
         {/* Link text */}
         <span
           className="relative z-10 text-lg font-bold leading-tight transition-colors duration-200"
-          style={{ color: hovered ? hoverText : linkText }}
+          style={{ color: isHovered ? hoverText : linkText }}
         >
           {item.link.title}
         </span>
@@ -54,7 +68,7 @@ export default function FaqLinkItem({ item, linkText, linkBorder, hoverBg, hover
           className="relative z-10 transition-opacity duration-200"
           style={{
             color: hoverText,
-            opacity: hovered ? 1 : 0,
+            opacity: isHovered ? 1 : 0,
           }}
         >
           <svg
