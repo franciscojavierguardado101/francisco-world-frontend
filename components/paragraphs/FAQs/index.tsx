@@ -74,7 +74,7 @@ export default function FAQs({ data }: Props) {
             {data.url && (
               <a
                 href={data.url.uri}
-                className="inline-flex items-center gap-2 mt-6 font-bold text-sm transition-opacity hover:opacity-70"
+                className="inline-flex items-center gap-2 mt-6 font-bold text-sm transition-transform hover:scale-105 inline-block"
                 style={{ color: colors.text, textDecoration: 'none' }}
               >
                 {data.url.title || 'See all'}
