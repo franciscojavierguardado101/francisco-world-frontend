@@ -13,7 +13,7 @@ export interface StackItem {
   url: { uri: string; title: string } | null;
   media: StackMediaItem | null;
   position: 'field_stack_l' | 'field_stack_r' | null;
-  color: 'field_stack_c_s' | 'field_stack_c_cr' | 'field_stack_c_b' | null;
+  color: 'field_stack_c_s' | 'field_stack_c_cr' | 'field_stack_c_b' | 'field_stack_c_l_g' | 'field_stack_c_l' | null;
 }
 
 export interface StackMarksItem {
@@ -26,7 +26,7 @@ export interface StackMarksItem {
   url: { uri: string; title: string } | null;
   media: StackMediaItem | null;
   position: 'field_stack_m_l' | 'field_stack_m_r' | null;
-  color: 'field_stack_m_c_s' | 'field_stack_m_c_cr' | 'field_stack_m_c_b' | 'field_stack_m_c_l_g' | null;
+  color: 'field_stack_m_c_s' | 'field_stack_m_c_cr' | 'field_stack_m_c_b' | 'field_stack_m_c_l_g' | 'field_stack_m_c_l' | null;
 }
 
 export interface FeatureStackData {
@@ -103,6 +103,15 @@ export const STACK_MARKS_COLOR_MAP: Record<string, {
     checkBg: 'rgb(207, 245, 106)',
     checkMark: '#000000',
   },
+  field_stack_m_c_l: {
+    tabBg: 'transparent',
+    tabText: '#000000',
+    tabArrow: '#000000',
+    hoverBg: 'rgb(175, 147, 196)',
+    hoverText: '#000000',
+    checkBg: 'rgb(175, 147, 196)',
+    checkMark: 'inherit', // resolved at render time from parent Feature Stack background color
+  },
 };
 
 // Child category tab color schemes — keyed by Drupal list_string value
@@ -132,6 +141,13 @@ export const STACK_COLOR_MAP: Record<string, {
     tabText: '#000000',
     tabArrow: '#000000',
     hoverBg: 'rgb(207, 245, 106)',
+    hoverText: '#000000',
+  },
+  field_stack_c_l: {
+    tabBg: 'transparent',
+    tabText: '#000000',
+    tabArrow: '#000000',
+    hoverBg: 'rgb(175, 147, 196)',
     hoverText: '#000000',
   },
   field_stack_c_b: {

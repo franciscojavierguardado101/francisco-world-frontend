@@ -27,6 +27,12 @@ export default function StackMarksItem({ stack, parentColor }: Props) {
     ? (STACK_MARKS_COLOR_MAP[stack.color] ?? STACK_MARKS_COLOR_MAP['field_stack_m_c_b'])
     : STACK_MARKS_COLOR_MAP['field_stack_m_c_b'];
 
+  // When checkMark is 'inherit', use the parent Feature Stack background color.
+  // This lets Lavender (and any future color) transparently adopt the section background.
+  const resolvedCheckMark = markColors.checkMark === 'inherit'
+    ? colors.bg
+    : markColors.checkMark;
+
   return (
     <StackLayout
       id={stack.id}
@@ -44,7 +50,7 @@ export default function StackMarksItem({ stack, parentColor }: Props) {
         <ul className="flex flex-col gap-3">
           {stack.details.map((detail, idx) => (
             <li key={idx} className="flex items-start gap-3">
-              <CheckmarkIcon checkBg={markColors.checkBg} checkMark={markColors.checkMark} />
+              <CheckmarkIcon checkBg={markColors.checkBg} checkMark={resolvedCheckMark} />
               <span className="text-base leading-relaxed" style={{ color: colors.subtext }}>
                 {detail}
               </span>
