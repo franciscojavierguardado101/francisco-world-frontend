@@ -1,8 +1,5 @@
-export interface StackMediaItem {
-  type: 'image' | 'video';
-  url: string;
-  alt?: string;
-}
+// Re-export MediaItem from utils as StackMediaItem for backwards compatibility
+export type { MediaItem as StackMediaItem } from '@/lib/paragraphs/utils';
 
 export interface StackItem {
   id: string;

@@ -1,10 +1,10 @@
-import { StackMediaItem } from '@/components/paragraphs/FeatureStack/types';
+import { MediaItem } from '@/lib/paragraphs/utils';
 
-export { StackMediaItem };
+export type { MediaItem };
 
 export interface SimpleMediaData {
   id: string;
-  media: StackMediaItem | null;
+  media: MediaItem | null;
   color: string;
 }
 

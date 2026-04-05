@@ -3,7 +3,13 @@
  * Import from here — never duplicate these functions across transformers.
  */
 
-import { StackMediaItem } from '@/components/paragraphs/FeatureStack/types';
+// Generic media item interface — used by all paragraph transformers.
+// Component-specific type aliases should re-export or extend this.
+export interface MediaItem {
+  type: 'image' | 'video';
+  url: string;
+  alt?: string;
+}
 
 const DRUPAL_BASE = process.env.NEXT_PUBLIC_DRUPAL_BASE_URL ?? '';
 
@@ -21,7 +27,7 @@ export function resolveUrl(url: string): string {
  * Extracts a media item (image or video) from a JSON:API relationship.
  * Works for any paragraph type — pass the relationship field and the included array.
  */
-export function extractMedia(rel: any, included: any[]): StackMediaItem | null {
+export function extractMedia(rel: any, included: any[]): MediaItem | null {
   if (!rel?.data) return null;
   const media = included.find((i: any) => i.id === rel.data.id);
   if (!media) return null;
@@ -32,7 +38,7 @@ export function extractMedia(rel: any, included: any[]): StackMediaItem | null {
     const rawUrl = file?.attributes?.uri?.url ?? '';
     if (rawUrl) {
       return {
-        type: 'image',
+        type: 'image' as const,
         url: resolveUrl(rawUrl),
         alt: media.attributes?.field_media_image?.alt ?? '',
       };
@@ -44,7 +50,7 @@ export function extractMedia(rel: any, included: any[]): StackMediaItem | null {
     const file = included.find((i: any) => i.id === vidRel.id);
     const rawUrl = file?.attributes?.uri?.url ?? '';
     if (rawUrl) {
-      return { type: 'video', url: resolveUrl(rawUrl) };
+      return { type: 'video' as const, url: resolveUrl(rawUrl) };
     }
   }
 
