@@ -6,6 +6,7 @@
 //   4. Done — ParagraphResolver and includes auto-update
 
 import '@/components/paragraphs/FeatureStack/register.tsx';
+import '@/components/paragraphs/FAQs/register.tsx';
 
 // Future components — just uncomment or add:
 // import '@/components/paragraphs/Hero/register';
