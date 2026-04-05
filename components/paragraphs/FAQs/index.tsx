@@ -30,7 +30,7 @@ export default function FAQs({ data }: Props) {
       <div className="max-w-[1524px] mx-auto px-6 py-20">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-start">
 
-          {/* Left side — caption, title, see-all url */}
+          {/* Left side — caption + title only */}
           <div className="flex flex-col gap-4">
             {data.caption && (
               <span
@@ -48,10 +48,33 @@ export default function FAQs({ data }: Props) {
                 {data.title}
               </h2>
             )}
+          </div>
+
+          {/* Right side — link list + see-all url below */}
+          <div className="flex flex-col gap-0" style={{ width: '556px', maxWidth: '100%' }}>
+            {data.links.length > 0 && (
+              <ul
+                className="p-0 m-0"
+                style={{ borderTop: `1px solid ${colors.text}` }}
+              >
+                {data.links.map((item) => (
+                  <FaqLinkItem
+                    key={item.id}
+                    item={item}
+                    linkText={colors.linkText}
+                    linkBorder={colors.text}
+                    hoverBg={colors.hoverBg}
+                    hoverText={colors.hoverText}
+                  />
+                ))}
+              </ul>
+            )}
+
+            {/* See-all URL — below the link list */}
             {data.url && (
               <a
                 href={data.url.uri}
-                className="inline-flex items-center gap-2 mt-4 font-bold text-sm transition-opacity hover:opacity-70"
+                className="inline-flex items-center gap-2 mt-6 font-bold text-sm transition-opacity hover:opacity-70"
                 style={{ color: colors.text, textDecoration: 'none' }}
               >
                 {data.url.title || 'See all'}
@@ -59,25 +82,6 @@ export default function FAQs({ data }: Props) {
               </a>
             )}
           </div>
-
-          {/* Right side — link list */}
-          {data.links.length > 0 && (
-            <ul
-              className="w-full p-0 m-0"
-              style={{ borderTop: `1px solid ${colors.linkBorder}` }}
-            >
-              {data.links.map((item) => (
-                <FaqLinkItem
-                  key={item.id}
-                  item={item}
-                  linkText={colors.linkText}
-                  linkBorder={colors.linkBorder}
-                  hoverBg={colors.hoverBg}
-                  hoverText={colors.hoverText}
-                />
-              ))}
-            </ul>
-          )}
         </div>
       </div>
     </section>
