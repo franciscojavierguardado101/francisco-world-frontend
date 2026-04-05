@@ -9,12 +9,12 @@ export default function SimpleMedia({ data }: Props) {
 
   return (
     <section
-      style={{ backgroundColor: colors.bg, paddingTop: '76px' }}
+      style={{ backgroundColor: colors.bg }}
       className="w-full"
     >
       <div
         className="max-w-[1524px] mx-auto"
-        style={{ padding: '40px 40px' }}
+        style={{ padding: '4px 40px' }}
       >
         {data.media && (
           <div className="w-full overflow-hidden">
