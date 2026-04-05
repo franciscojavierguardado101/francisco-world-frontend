@@ -55,7 +55,6 @@ export default function FAQs({ data }: Props) {
             {data.links.length > 0 && (
               <ul
                 className="p-0 m-0"
-                style={{ borderTop: `1px solid ${colors.text}` }}
               >
                 {data.links.map((item) => (
                   <FaqLinkItem
@@ -74,7 +73,7 @@ export default function FAQs({ data }: Props) {
             {data.url && (
               <a
                 href={data.url.uri}
-                className="inline-flex items-center gap-2 mt-6 font-bold text-sm transition-transform hover:scale-105 inline-block"
+                className="inline-flex items-center gap-2 mt-10 font-bold text-sm transition-transform hover:scale-105 inline-block"
                 style={{ color: colors.text, textDecoration: 'none' }}
               >
                 {data.url.title || 'See all'}

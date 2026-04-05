@@ -28,8 +28,8 @@ export default function FaqLinkItem({ item, linkText, linkBorder, hoverBg, hover
 
   return (
     <li
-      className="list-none"
-      style={{ borderBottom: `1px solid ${linkBorder}` }}
+      className="list-none border-b-0"
+      style={{ borderTop: `1px solid ${linkBorder}` }}
     >
       <a
         href={item.link.uri}
