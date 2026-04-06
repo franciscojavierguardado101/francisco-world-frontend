@@ -1,11 +1,11 @@
-import { StackMediaItem } from './types';
+import { MediaItem } from '@/lib/paragraphs/utils';
 
 interface Props {
   id: string;
   isRight: boolean;
   title: string;
   description: string;
-  media: StackMediaItem | null;
+  media: MediaItem | null;
   url: { uri: string; title: string } | null;
   textColor: string;
   subtextColor: string;

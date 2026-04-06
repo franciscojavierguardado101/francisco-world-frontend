@@ -1,5 +1,7 @@
-// Re-export MediaItem from utils as StackMediaItem for backwards compatibility
-export type { MediaItem as StackMediaItem } from '@/lib/paragraphs/utils';
+import { MediaItem } from '@/lib/paragraphs/utils';
+export type { MediaItem };
+// StackMediaItem is an alias for MediaItem — use MediaItem in new components
+export type StackMediaItem = MediaItem;
 
 export interface StackItem {
   id: string;

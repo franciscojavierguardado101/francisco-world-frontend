@@ -19,7 +19,7 @@ export default function FeatureStackCategories({ stacks }: Props) {
 
   if (!stacksWithCategories.length) return null;
 
-  const rows: StackItem[][] = [];
+  const rows: (StackItem | StackMarksItem)[][] = [];
   for (let i = 0; i < stacksWithCategories.length; i += COLS_PER_ROW) {
     rows.push(stacksWithCategories.slice(i, i + COLS_PER_ROW));
   }

@@ -1,4 +1,4 @@
-import { getAllIncludes } from '@/lib/paragraphs/registry.tsx';
+import { getAllIncludes } from '@/lib/paragraphs/registry';
 import { resolveDrupalPath, fetchDrupalResource } from '@/lib/drupal';
 import { notFound } from 'next/navigation';
 import ParagraphResolver from '@/components/paragraphs/ParagraphResolver';
