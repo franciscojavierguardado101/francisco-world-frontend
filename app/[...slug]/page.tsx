@@ -1,5 +1,3 @@
-// Import registry so all components and their includes are loaded
-import '@/lib/paragraphs/index';
 import { getAllIncludes } from '@/lib/paragraphs/registry';
 import { resolveDrupalPath, fetchDrupalResource } from '@/lib/drupal';
 import { notFound } from 'next/navigation';
@@ -17,7 +15,7 @@ export default async function CatchAllPage({
   if (!route) return notFound();
 
   // Includes are automatically derived from all registered paragraph components.
-  // No manual maintenance needed — adding a new component auto-updates includes.
+  // No manual maintenance needed — adding a new component to registry.ts auto-updates includes.
   const includes = getAllIncludes();
   const data = await fetchDrupalResource(route.jsonapiUrl, includes);
   if (!data) return notFound();

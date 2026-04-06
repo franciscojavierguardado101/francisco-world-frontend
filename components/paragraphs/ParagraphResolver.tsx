@@ -1,5 +1,3 @@
-// Import registry — this loads all registered paragraph components automatically
-import '@/lib/paragraphs/index';
 import { getParagraphComponent } from '@/lib/paragraphs/registry';
 
 interface Props {
