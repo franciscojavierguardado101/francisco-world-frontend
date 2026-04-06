@@ -1,4 +1,4 @@
-import { getParagraphComponent } from '@/lib/paragraphs/registry';
+import { getParagraphComponent } from '@/lib/paragraphs/registry.tsx';
 
 interface Props {
   paragraph: any;
