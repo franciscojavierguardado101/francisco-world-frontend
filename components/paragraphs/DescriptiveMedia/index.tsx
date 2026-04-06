@@ -12,7 +12,7 @@ export default function DescriptiveMedia({ data }: Props) {
     <div className="flex flex-col gap-6 justify-center py-10 lg:py-0">
       {data.caption && (
         <span
-          className="text-xs font-bold tracking-widest uppercase"
+          className="text-base leading-relaxed"
           style={{ color: colors.text }}
         >
           {data.caption}
@@ -28,7 +28,7 @@ export default function DescriptiveMedia({ data }: Props) {
       )}
       {data.desc && (
         <p
-          className="text-xs font-bold tracking-widest uppercase"
+          className="text-base leading-relaxed"
           style={{ color: colors.text }}
         >
           {data.desc}
