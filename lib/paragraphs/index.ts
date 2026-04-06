@@ -8,6 +8,7 @@
 import '@/components/paragraphs/FeatureStack/register.tsx';
 import '@/components/paragraphs/FAQs/register.tsx';
 import '@/components/paragraphs/SimpleMedia/register.tsx';
+import '@/components/paragraphs/Fact/register.tsx';
 
 // Future components — just uncomment or add:
 // import '@/components/paragraphs/Hero/register';
