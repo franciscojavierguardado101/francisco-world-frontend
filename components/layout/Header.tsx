@@ -41,7 +41,11 @@ export default function Header({ mainNav, actions }: HeaderProps) {
               {navItems.map(item => (
                 <li key={item.id} onMouseEnter={() => item.children.length > 0 ? setOpenMegamenu(item.title) : setOpenMegamenu(null)}>
                   {item.children.length > 0 ? (
-                    <button className="relative px-4 py-2 text-sm font-bold transition-colors group">
+                    <Link
+                      href={item.url}
+                      onClick={() => setOpenMegamenu(null)}
+                      className="relative px-4 py-2 text-sm font-bold transition-colors group block"
+                    >
                       <span className={openMegamenu === item.title ? 'text-white' : 'text-white/80 group-hover:text-white'}>
                         {item.title}
                       </span>
@@ -49,7 +53,7 @@ export default function Header({ mainNav, actions }: HeaderProps) {
                         'absolute bottom-0 left-4 right-4 h-[2px] bg-white transition-opacity',
                         openMegamenu === item.title ? 'opacity-100' : 'opacity-0 group-hover:opacity-100',
                       ].join(' ')} />
-                    </button>
+                    </Link>
                   ) : (
                     <Link
                       href={item.url}
@@ -103,15 +107,24 @@ export default function Header({ mainNav, actions }: HeaderProps) {
                 <div key={item.id}>
                   {item.children.length > 0 ? (
                     <div>
-                      <button
-                        onClick={() => setOpenMegamenu(openMegamenu === item.title ? null : item.title)}
-                        className="w-full text-left py-3 text-sm font-bold text-white border-b border-white/10 flex justify-between items-center"
-                      >
-                        {item.title}
-                        <svg viewBox="0 0 16 16" width="12" height="12" fill="currentColor" style={{ opacity: 0.4 }}>
-                          <path d="M8 10.94L2.53 5.47l1.06-1.06L8 8.82l4.41-4.41 1.06 1.06L8 10.94z"/>
-                        </svg>
-                      </button>
+                      <div className="flex items-center justify-between border-b border-white/10">
+                        <Link
+                          href={item.url}
+                          className="py-3 text-sm font-bold text-white flex-1"
+                          onClick={() => setMobileOpen(false)}
+                        >
+                          {item.title}
+                        </Link>
+                        <button
+                          onClick={() => setOpenMegamenu(openMegamenu === item.title ? null : item.title)}
+                          className="py-3 px-2 text-white"
+                          aria-label="Toggle submenu"
+                        >
+                          <svg viewBox="0 0 16 16" width="12" height="12" fill="currentColor" style={{ opacity: 0.4 }}>
+                            <path d="M8 10.94L2.53 5.47l1.06-1.06L8 8.82l4.41-4.41 1.06 1.06L8 10.94z"/>
+                          </svg>
+                        </button>
+                      </div>
                       {openMegamenu === item.title && (
                         <div className="pl-4 py-3 space-y-5">
                           {item.children.map(column => (
