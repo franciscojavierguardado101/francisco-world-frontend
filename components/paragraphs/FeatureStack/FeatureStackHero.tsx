@@ -38,7 +38,7 @@ export default function FeatureStackHero({ data }: Props) {
 
       {/* Media side */}
       {data.media && (
-        <div className="relative w-full aspect-square overflow-hidden">
+        <div className="relative w-full aspect-video overflow-hidden">
           {data.media.type === 'video' ? (
             <video
               src={data.media.url}

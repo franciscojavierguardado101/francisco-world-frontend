@@ -40,7 +40,7 @@ export default function ArtisticCarousel({ data }: Props) {
   const mediaCol = (
     <div className="flex flex-col gap-6">
       {/* Media */}
-      <div className="relative w-full overflow-hidden" style={{ aspectRatio: '1/1' }}>
+      <div className="relative w-full overflow-hidden" style={{ aspectRatio: '4/3' }}>
         {card.media ? (
           card.media.type === 'video' ? (
             <video

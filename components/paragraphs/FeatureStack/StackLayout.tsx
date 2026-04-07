@@ -82,7 +82,7 @@ export default function StackLayout({
 
         {/* Media side */}
         {media && (
-          <div className="relative w-full aspect-square overflow-hidden">
+          <div className="relative w-full aspect-video overflow-hidden">
             {media.type === 'video' ? (
               <video
                 src={media.url}
