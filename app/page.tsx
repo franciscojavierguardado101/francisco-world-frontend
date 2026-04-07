@@ -1,3 +1,4 @@
+import { getAllIncludes } from '@/lib/paragraphs/registry';
 import { resolveDrupalPath, fetchDrupalResource } from '@/lib/drupal';
 import ParagraphResolver from '@/components/paragraphs/ParagraphResolver';
 
@@ -11,7 +12,7 @@ export default async function HomePage() {
     );
   }
 
-  const includes = ['field_components'];
+  const includes = getAllIncludes();
   const data = await fetchDrupalResource(route.jsonapiUrl, includes);
   if (!data) return null;
 
@@ -19,17 +20,18 @@ export default async function HomePage() {
   const included = data.included ?? [];
   const components = node.relationships?.field_components?.data ?? [];
 
-  const resolvedComponents = components.map((ref: any) => {
-    const paragraph = included.find(
-      (i: any) => i.id === ref.id && i.type === ref.type
-    );
-    if (!paragraph) return null;
-    return { ...paragraph, _included: included };
-  }).filter(Boolean);
+  const resolvedComponents = components
+    .map((ref: any) => {
+      const paragraph = included.find(
+        (i: any) => i.id === ref.id && i.type === ref.type
+      );
+      if (!paragraph) return null;
+      return { ...paragraph, _included: included };
+    })
+    .filter(Boolean);
 
   return (
     <main>
-      <h1>{node.attributes?.title}</h1>
       {resolvedComponents.map((paragraph: any) => (
         <ParagraphResolver key={paragraph.id} paragraph={paragraph} />
       ))}
